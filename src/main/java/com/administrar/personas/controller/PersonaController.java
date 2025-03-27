@@ -4,6 +4,7 @@ import com.administrar.personas.model.Persona;
 import com.administrar.personas.service.PersonaService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -13,11 +14,15 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/api/personas")
 @Tag(name = "Personas API", description = "API para gestionar personas")
-@RequiredArgsConstructor
 public class PersonaController {
 
+
     private final PersonaService personaService;
-    
+
+    public PersonaController(PersonaService personaService) {
+        this.personaService = personaService;
+    }
+
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     @Operation(summary = "Crear una nueva persona", description = "Crea una nueva persona en la base de datos")
     public ResponseEntity<Persona> crearPersona(@RequestBody Persona persona) {
