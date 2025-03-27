@@ -11,6 +11,8 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/personas")
 @Tag(name = "Personas API", description = "API para gestionar personas")
@@ -41,4 +43,9 @@ public class PersonaController {
     }
 
 
+    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    @Operation(summary = "Obtener todas las personas", description = "Obtiene una lista de todas las personas")
+    public ResponseEntity<List<Persona>> obtenerTodasLasPersonas() {
+        return ResponseEntity.ok(personaService.getAll());
+    }
 } 
